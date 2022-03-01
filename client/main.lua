@@ -116,6 +116,10 @@ local idTypes = {
     ["weaponlicense"] = {
         label = "Firearms License",
         item = "weaponlicense"
+    },
+    ["permit"] = {
+        label = "Drivers Permit",
+        item = "permit"
     }
 }
 
@@ -146,6 +150,9 @@ RegisterNUICallback('requestLicenses', function(data, cb)
             elseif type == "weapon" then
                 licenseType = "weaponlicense"
                 label = "Firearms License"
+            elseif type == "permit" then
+                licenseType = "permit"
+                label = "Drivers Permit"
             end
 
             availableLicenses[#availableLicenses+1] = {

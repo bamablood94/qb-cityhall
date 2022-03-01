@@ -22,6 +22,11 @@ RegisterNetEvent('qb-cityhall:server:requestId', function(identityData)
         info.firstname = Player.PlayerData.charinfo.firstname
         info.lastname = Player.PlayerData.charinfo.lastname
         info.birthdate = Player.PlayerData.charinfo.birthdate
+    elseif identityData.item == "permit" then
+        info.firstname = Player.PlayerData.charinfo.firstname
+        info.lastname = Player.PlayerData.charinfo.lastname
+        info.birthdate = Player.PlayerData.charinfo.birthdate
+        info.type = "Drivers Permit"
     end
 
     Player.Functions.AddItem(identityData.item, 1, nil, info)
