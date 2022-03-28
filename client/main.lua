@@ -65,7 +65,7 @@ CreateThread(function()
         local dist = #(pos - Config.Cityhall.coords)
         local dist2 = #(pos - Config.DrivingSchool.coords)
 
-        if dist < 20 then
+        --[[if dist < 20 then
             inRange = true
             DrawMarker(2, Config.Cityhall.coords.x, Config.Cityhall.coords.y, Config.Cityhall.coords.z, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.3, 0.2, 0.2, 155, 152, 234, 155, false, false, false, true, false, false, false)
             if #(pos - vector3(Config.Cityhall.coords.x, Config.Cityhall.coords.y, Config.Cityhall.coords.z)) < 1.5 then
@@ -74,7 +74,7 @@ CreateThread(function()
                     qbCityhall.Open()
                 end
             end
-        end
+        end]]
 
         if not inRange then
             Wait(1000)
@@ -124,14 +124,14 @@ local idTypes = {
 }
 
 RegisterNUICallback('requestId', function(data)
-    if inRange then
+    --if inRange then
         local idType = data.idType
 
         TriggerServerEvent('qb-cityhall:server:requestId', idTypes[idType])
         QBCore.Functions.Notify('You have recived your '..idTypes[idType].label..' for $50', 'success', 3500)
-    else
-        QBCore.Functions.Notify('This will not work', 'error')
-    end
+    --else
+        --QBCore.Functions.Notify('This will not work', 'error')
+    --end
 end)
 
 RegisterNUICallback('requestLicenses', function(data, cb)
@@ -165,9 +165,13 @@ RegisterNUICallback('requestLicenses', function(data, cb)
 end)
 
 RegisterNUICallback('applyJob', function(data)
-    if inRange then
+    --if inRange then
         TriggerServerEvent('qb-cityhall:server:ApplyJob', data.job)
-    else
-        QBCore.Functions.Notify('Unfortunately will not work ...', 'error')
-    end
+    --else
+       --QBCore.Functions.Notify('Unfortunately will not work ...', 'error')
+    --end
+end)
+
+RegisterNetEvent('qb-cityhall:client:openui', function ()
+    qbCityhall.Open()
 end)
