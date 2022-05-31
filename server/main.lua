@@ -56,7 +56,8 @@ RegisterNetEvent('qb-cityhall:server:sendDriverTest', function()
             TriggerEvent("qb-phone:server:sendNewEventMail", v, mailData)
         end
     end
-    TriggerClientEvent('QBCore:Notify', src, 'An email has been sent to driving schools, and you will be contacted automatically', "success", 5000)
+    --TriggerClientEvent('QBCore:Notify', src, 'An email has been sent to driving schools, and you will be contacted automatically', "success", 5000)
+    TriggerClientEvent('okokNotify:Alert', src, 'Email Sent', 'An email has been sent to driving schools, and you will be contacted automatically', 5000, 'success')
 end)
 
 local AvailableJobs = {
@@ -91,7 +92,8 @@ RegisterNetEvent('qb-cityhall:server:ApplyJob', function(job)
     end
 
     Player.Functions.SetJob(job, 0)
-    TriggerClientEvent('QBCore:Notify', src, 'Congratulations with your new job! ('..JobInfo.label..')')
+    --TriggerClientEvent('QBCore:Notify', src, 'Congratulations with your new job! ('..JobInfo.label..')')
+    TriggerClientEvent('okokNotify:Alert', src, 'Congratulations!', 'Congrats on your new job as a '..JobInfo.label)
 end)
 
 -- QBCore.Commands.Add("drivinglicense", "Give a driver's license to someone", {{"id", "ID of a person"}}, true, function(source, args)
