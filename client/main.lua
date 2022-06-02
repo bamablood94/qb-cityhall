@@ -41,7 +41,8 @@ end)
 local inRange = false
 
 CreateThread(function()
-    CityhallBlip = AddBlipForCoord(Config.Cityhall.coords)
+    local config = Config.Cityhall.coords
+    CityhallBlip = AddBlipForCoord(vector3(config['x'], config['y'], config['z']))
     SetBlipSprite (CityhallBlip, 487)
     SetBlipDisplay(CityhallBlip, 4)
     SetBlipScale  (CityhallBlip, 0.65)
@@ -61,10 +62,10 @@ CreateThread(function()
         local ped = PlayerPedId()
         local pos = GetEntityCoords(ped)
         inRange = false
+        local config = Config.Cityhall.coords
+        local dist = #(pos - vector3(config['x'], config['y'], config['z']))
 
-        local dist = #(pos - Config.Cityhall.coords)
-
-        --[[if dist < 20 then
+        if dist < 20 then
             inRange = true
             DrawMarker(2, Config.Cityhall.coords.x, Config.Cityhall.coords.y, Config.Cityhall.coords.z, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.3, 0.2, 0.2, 155, 152, 234, 155, false, false, false, true, false, false, false)
             if #(pos - vector3(Config.Cityhall.coords.x, Config.Cityhall.coords.y, Config.Cityhall.coords.z)) < 1.5 then
@@ -73,7 +74,7 @@ CreateThread(function()
                     qbCityhall.Open()
                 end
             end
-        end]]
+        end
 
         if not inRange then
             Wait(1000)
@@ -174,4 +175,26 @@ end)
 
 RegisterNetEvent('qb-cityhall:client:openui', function ()
     qbCityhall.Open()
+end)
+
+CreateThread( function ()
+    exports['qb-target']:SpawnPed({
+        model = 'a_m_y_indian_01',
+        coords = Config.Cityhall.coords,
+        minusOne = true,
+        freeze = true,
+        invincible = true,
+        blockevents = true,
+        target = {
+            options = {
+                {
+                    type = 'client',
+                    icon = 'fas fa-clipboard',
+                    label = 'Open Menu',
+                    event = 'qb-cityhall:client:openui'
+                },
+            },
+            distance = 2.5,
+        }
+    })
 end)

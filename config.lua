@@ -3,5 +3,5 @@ Config = Config or {}
 Config.CompanyPrice = 25000
 
 Config.Cityhall = {
-    coords = vector3(-550.14, -190.24, 38.22)
+    coords = vector4(-552.48, -202.85, 38.24, 313.24)
 }
